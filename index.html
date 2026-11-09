@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <title>QalaFix — Город начинается с тебя</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="QalaFix">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span>Qala<span>Fix</span><small>ГОРОДСКАЯ ПЛАТФОРМА</small></span>
+      </a>
+      <div class="side-label">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+      <nav class="nav">
+        <button class="nav-link active" data-page="overview"><span>▦</span> Обзор</button>
+        <button class="nav-link" data-page="map"><span>⌖</span> Карта проблем</button>
+        <button class="nav-link" data-page="reports"><span>▤</span> Обращения <b id="navCount">0</b></button>
+      </nav>
+      <div class="side-label second">УПРАВЛЕНИЕ</div>
+      <nav class="nav">
+        <button class="nav-link" data-page="analytics"><span>▥</span> Аналитика</button>
+        <button class="nav-link" data-page="admin"><span>⚙</span> Администрирование</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-icon">✦</div>
+          <strong>Есть проблема?</strong>
+          <p>Помогите сделать город лучше — сообщите нам.</p>
+          <button class="btn btn-primary btn-full" id="sideCreate">＋ Создать обращение</button>
+        </div>
+        <div class="profile">
+          <div class="avatar">М</div><div><strong>Михаил</strong><small>Демонстрационный аккаунт</small></div>
+          <span class="dots">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu">☰</button>
+        <div class="crumb">QalaFix <span>/</span> <strong id="pageCrumb">Обзор</strong></div>
+        <div class="top-actions">
+          <div class="city-select">⌖ <span>Жезказган, Казахстан</span>⌄</div>
+          <button class="icon-btn" id="themeToggle" title="Переключить тему">◐</button>
+          <button class="avatar small-avatar" title="Профиль">М</button>
+        </div>
+      </header>
+
+      <section class="page active" id="page-overview">
+        <div class="welcome-row">
+          <div><div class="eyebrow">ПОНЕДЕЛЬНИК, 9 НОЯБРЯ 2026</div><h1>Город начинается <em>с тебя.</em></h1><p class="muted">Следите за состоянием городской инфраструктуры и помогайте менять Жезказган к лучшему.</p></div>
+          <button class="btn btn-primary" id="heroCreate">＋ Сообщить о проблеме</button>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Всего обращений</span><span class="stat-icon violet">▤</span></div><strong id="statTotal">128</strong><small class="positive">↑ 12% <span>за этот месяц</span></small></article>
+          <article class="stat-card"><div class="stat-top"><span>Решено</span><span class="stat-icon green">✓</span></div><strong id="statResolved">86</strong><small class="positive">67% <span>от всех обращений</span></small></article>
+          <article class="stat-card"><div class="stat-top"><span>В работе</span><span class="stat-icon blue">◷</span></div><strong id="statProgress">27</strong><small class="neutral">Обрабатываются сейчас</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Ожидают решения</span><span class="stat-icon orange">!</span></div><strong id="statPending">15</strong><small class="neutral">Требуют внимания</small></article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel map-panel">
+            <div class="panel-heading"><div><h2>Проблемы на карте</h2><p>Распределение обращений по городу</p></div><button class="text-btn" data-goto="map">Открыть карту ↗</button></div>
+            <div class="map-preview" id="mapPreview">
+              <div class="map-road road-a"></div><div class="map-road road-b"></div><div class="map-road road-c"></div><div class="map-road road-d"></div>
+              <div class="map-block block-a"></div><div class="map-block block-b"></div><div class="map-block block-c"></div><div class="map-block block-d"></div><div class="map-block block-e"></div>
+              <span class="map-label label-a">ЦЕНТР</span><span class="map-label label-b">МИКРОРАЙОН 7</span><span class="map-label label-c">ПАРК</span>
+              <button class="pin pin-red p1" data-pin="1">!</button><button class="pin pin-orange p2" data-pin="2">!</button><button class="pin pin-green p3" data-pin="3">✓</button><button class="pin pin-red p4" data-pin="4">!</button><button class="pin pin-blue p5" data-pin="5">i</button>
+              <div class="map-legend"><span><i class="dot red"></i> Новые</span><span><i class="dot orange"></i> В работе</span><span><i class="dot green"></i> Решены</span></div>
+              <div class="map-credit">Демонстрационная схема города</div>
+            </div>
+          </section>
+          <section class="panel activity-panel">
+            <div class="panel-heading"><div><h2>Последние обращения</h2><p>Что происходит в городе</p></div><button class="text-btn" data-goto="reports">Все обращения ↗</button></div>
+            <div class="activity-list" id="recentList"></div>
+          </section>
+        </div>
+
+        <section class="panel category-panel">
+          <div class="panel-heading"><div><h2>Категории проблем</h2><p>На что жители обращают внимание</p></div></div>
+          <div class="category-grid">
+            <div class="category-item"><span class="category-icon road">⌁</span><div><strong>Дороги</strong><small>42 обращения</small></div><b>33%</b></div>
+            <div class="category-item"><span class="category-icon light">☼</span><div><strong>Освещение</strong><small>28 обращений</small></div><b>22%</b></div>
+            <div class="category-item"><span class="category-icon trash">♲</span><div><strong>Мусор</strong><small>24 обращения</small></div><b>19%</b></div>
+            <div class="category-item"><span class="category-icon home">⌂</span><div><strong>ЖКХ</strong><small>19 обращений</small></div><b>15%</b></div>
+            <div class="category-item"><span class="category-icon park">♧</span><div><strong>Общественные места</strong><small>15 обращений</small></div><b>11%</b></div>
+          </div>
+        </section>
+        <div class="demo-note">ⓘ Демо-данные для презентации. Платформа не подключена к городским службам.</div>
+      </section>
+
+      <section class="page" id="page-map">
+        <div class="page-title-row"><div><div class="eyebrow">МОНИТОРИНГ</div><h1>Карта проблем</h1><p class="muted">Наглядная картина обращений жителей.</p></div><button class="btn btn-primary" id="mapCreate">＋ Новое обращение</button></div>
+        <div class="filter-row"><input id="mapSearch" class="search" placeholder="⌕  Поиск по адресу или проблеме"><select id="mapFilter"><option value="all">Все категории</option><option>Дороги</option><option>Освещение</option><option>Мусор</option><option>ЖКХ</option><option>Общественные места</option></select><select id="statusFilter"><option value="all">Все статусы</option><option>Новое</option><option>В работе</option><option>Решено</option></select></div>
+        <div class="large-map" id="largeMap">
+          <div class="map-road road-a"></div><div class="map-road road-b"></div><div class="map-road road-c"></div><div class="map-road road-d"></div><div class="map-road road-e"></div>
+          <div class="map-block block-a"></div><div class="map-block block-b"></div><div class="map-block block-c"></div><div class="map-block block-d"></div><div class="map-block block-e"></div><div class="map-block block-f"></div>
+          <span class="map-label label-a">ЦЕНТР</span><span class="map-label label-b">МИКРОРАЙОН 7</span><span class="map-label label-c">ПАРК</span><span class="map-label label-d">ВОКЗАЛ</span>
+          <div id="mapPins"></div>
+          <div class="map-scale">ЖЕЗКАЗГАН · ДЕМО-КАРТА</div>
+        </div>
+        <div class="map-bottom"><span id="mapResultCount">Показано 5 обращений</span><span><i class="dot red"></i> Новое　<i class="dot orange"></i> В работе　<i class="dot green"></i> Решено</span></div>
+      </section>
+
+      <section class="page" id="page-reports">
+        <div class="page-title-row"><div><div class="eyebrow">ОБРАТНАЯ СВЯЗЬ</div><h1>Обращения жителей</h1><p class="muted">Список зарегистрированных городских проблем.</p></div><button class="btn btn-primary" id="reportsCreate">＋ Создать обращение</button></div>
+        <div class="filter-row"><input id="reportSearch" class="search" placeholder="⌕  Найти обращение..."><select id="reportFilter"><option value="all">Все категории</option><option>Дороги</option><option>Освещение</option><option>Мусор</option><option>ЖКХ</option><option>Общественные места</option></select><select id="reportStatus"><option value="all">Все статусы</option><option>Новое</option><option>В работе</option><option>Решено</option></select></div>
+        <div class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>ОБРАЩЕНИЕ</th><th>КАТЕГОРИЯ</th><th>АДРЕС</th><th>ДАТА</th><th>СТАТУС</th><th></th></tr></thead><tbody id="reportsBody"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-analytics">
+        <div class="page-title-row"><div><div class="eyebrow">ДАННЫЕ И ИНСАЙТЫ</div><h1>Аналитика</h1><p class="muted">Демонстрационная статистика обращений.</p></div><span class="period-chip">За последние 30 дней ⌄</span></div>
+        <div class="stats-grid analytics-stats"><article class="stat-card"><div class="stat-top"><span>Всего обращений</span><span class="stat-icon violet">▤</span></div><strong id="analyticsTotal">128</strong><small class="positive">↑ 12% <span>к прошлому периоду</span></small></article><article class="stat-card"><div class="stat-top"><span>Доля решений</span><span class="stat-icon green">✓</span></div><strong>67%</strong><small class="positive">Целевой показатель — 75%</small></article><article class="stat-card"><div class="stat-top"><span>Среднее время</span><span class="stat-icon blue">◷</span></div><strong>4,2 <small class="unit">дня</small></strong><small class="neutral">От регистрации до решения</small></article></div>
+        <div class="content-grid">
+          <section class="panel chart-panel"><div class="panel-heading"><div><h2>Динамика обращений</h2><p>Количество новых обращений по неделям</p></div></div><div class="bar-chart"><div class="chart-y"><span>40</span><span>30</span><span>20</span><span>10</span><span>0</span></div><div class="bars"><div class="bar-col"><div class="bar" style="height:42%"></div><small>Нед. 1</small></div><div class="bar-col"><div class="bar" style="height:61%"></div><small>Нед. 2</small></div><div class="bar-col"><div class="bar" style="height:52%"></div><small>Нед. 3</small></div><div class="bar-col"><div class="bar current" style="height:83%"></div><small>Нед. 4</small></div></div></div></section>
+          <section class="panel"><div class="panel-heading"><div><h2>Статусы обращений</h2><p>Распределение по состоянию</p></div></div><div class="donut-wrap"><div class="donut"><div><strong>128</strong><small>всего</small></div></div><div class="donut-legend"><span><i class="dot green"></i> Решено <b>86</b></span><span><i class="dot orange"></i> В работе <b>27</b></span><span><i class="dot red"></i> Новое <b>15</b></span></div></div></section>
+        </div>
+        <div class="demo-note">Статистика условная и используется для демонстрации интерфейса.</div>
+      </section>
+
+      <section class="page" id="page-admin">
+        <div class="page-title-row"><div><div class="eyebrow">ПАНЕЛЬ УПРАВЛЕНИЯ</div><h1>Администрирование</h1><p class="muted">Демонстрация работы с обращениями.</p></div><span class="admin-chip">● Режим демонстрации</span></div>
+        <div class="admin-banner"><div><strong>Управляйте обращениями прозрачно</strong><p>Меняйте статусы, проверяйте детали и показывайте жителям ход работы.</p></div><span>⚙</span></div>
+        <div class="stats-grid"><article class="stat-card"><div class="stat-top"><span>Новые</span><span class="stat-icon orange">!</span></div><strong id="adminNew">15</strong><small class="neutral">Ожидают рассмотрения</small></article><article class="stat-card"><div class="stat-top"><span>В работе</span><span class="stat-icon blue">◷</span></div><strong id="adminWork">27</strong><small class="neutral">Назначены исполнителям</small></article><article class="stat-card"><div class="stat-top"><span>Решено</span><span class="stat-icon green">✓</span></div><strong id="adminDone">86</strong><small class="positive">Успешно закрыты</small></article></div>
+        <div class="panel table-panel"><div class="panel-heading"><div><h2>Управление обращениями</h2><p>Выберите статус в строке, чтобы обновить обращение.</p></div></div><div class="table-wrap"><table><thead><tr><th>ОБРАЩЕНИЕ</th><th>КАТЕГОРИЯ</th><th>АДРЕС</th><th>СТАТУС</th><th>ИЗМЕНИТЬ</th></tr></thead><tbody id="adminBody"></tbody></table></div></div>
+      </section>
+
+      <footer class="footer"><span>© 2026 QalaFix. Концепт городских изменений.</span><span>Сделано с заботой о городе <b>♥</b></span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="reportModal">
+    <div class="modal">
+      <div class="modal-head"><div><div class="eyebrow">ОБРАТНАЯ СВЯЗЬ</div><h2>Сообщить о проблеме</h2><p>Расскажите, что нужно исправить в городе.</p></div><button class="close-btn" id="closeModal">×</button></div>
+      <form id="reportForm">
+        <label>Категория проблемы<select id="newCategory" required><option value="">Выберите категорию</option><option>Дороги</option><option>Освещение</option><option>Мусор</option><option>ЖКХ</option><option>Общественные места</option></select></label>
+        <label>Краткое название<input id="newTitle" required maxlength="70" placeholder="Например: Повреждено дорожное покрытие"></label>
+        <label>Описание<textarea id="newDescription" required rows="3" placeholder="Опишите проблему подробнее..."></textarea></label>
+        <label>Адрес или ориентир<input id="newAddress" required placeholder="Улица, дом или ближайший ориентир"></label>
+        <label>Фотография проблемы <span class="optional">необязательно</span><input id="newPhoto" type="file" accept="image/*"></label>
+        <div class="form-hint">ⓘ В демо-версии обращение сохраняется только в этом браузере.</div>
+        <button class="btn btn-primary btn-full" type="submit">Отправить обращение →</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="detailModal"><div class="modal detail-modal"><button class="close-btn detail-close" id="closeDetail">×</button><div id="detailContent"></div></div></div>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
